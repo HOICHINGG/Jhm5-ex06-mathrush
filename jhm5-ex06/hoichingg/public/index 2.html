@@ -1,0 +1,346 @@
+<!doctype html>
+<html lang="zh-TW">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>數學反應挑戰 - Math Rush Challenge</title>
+  <link rel="stylesheet" href="styles/main.css">
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="main-nav">
+    <div class="nav-container">
+      <div class="nav-brand">數學反應挑戰</div>
+      <div class="nav-links">
+        <a href="#" class="nav-link active" data-page="game">遊戲</a>
+        <a href="#" class="nav-link" data-page="instructions">遊戲說明</a>
+        <a href="#" class="nav-link" data-page="about">關於我們</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Game Page -->
+  <div id="game-page" class="page active">
+    <div class="container">
+      <!-- Header -->
+      <header class="game-header">
+        <h1 class="game-title">🧮 數學反應挑戰</h1>
+        <p class="game-subtitle">測試你的數學速度和準確性！</p>
+      </header>
+
+      <!-- Game Settings (Before Start) -->
+      <div id="game-settings" class="game-settings">
+        <h2>遊戲設定</h2>
+        
+        <div class="settings-group">
+          <label for="difficulty-select">難度等級：</label>
+          <select id="difficulty-select" class="setting-select">
+            <option value="easy">簡單 (1-10)</option>
+            <option value="medium" selected>中等 (1-50)</option>
+            <option value="hard">困難 (1-100)</option>
+            <option value="extreme">極限 (1-999)</option>
+          </select>
+        </div>
+
+        <div class="settings-group">
+          <label for="operation-select">運算類型：</label>
+          <select id="operation-select" class="setting-select">
+            <option value="mixed" selected>混合運算</option>
+            <option value="addition">僅加法</option>
+            <option value="subtraction">僅減法</option>
+            <option value="multiplication">僅乘法</option>
+            <option value="division">僅除法</option>
+          </select>
+        </div>
+
+        <div class="settings-group">
+          <label for="time-mode-select">時間模式：</label>
+          <select id="time-mode-select" class="setting-select">
+            <option value="normal" selected>標準 (10秒/題)</option>
+            <option value="fast">快速 (7秒/題)</option>
+            <option value="pressure">壓力 (5秒/題)</option>
+            <option value="extreme">極限 (3秒/題)</option>
+          </select>
+        </div>
+
+        <div class="settings-group">
+          <label for="question-count-select">題目數量：</label>
+          <select id="question-count-select" class="setting-select">
+            <option value="10">10 題</option>
+            <option value="20" selected>20 題</option>
+            <option value="30">30 題</option>
+            <option value="50">50 題</option>
+          </select>
+        </div>
+
+        <button id="start-game-btn" class="btn btn-primary btn-large">開始遊戲</button>
+      </div>
+
+      <!-- Game Area (Hidden Initially) -->
+      <div id="game-area" class="game-area" style="display: none;">
+        <!-- Stats Dashboard -->
+        <div class="stats-dashboard">
+          <div class="stat-card">
+            <div class="stat-label">分數</div>
+            <div class="stat-value" id="score-display">0</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">題目</div>
+            <div class="stat-value" id="question-count-display">0/20</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">正確率</div>
+            <div class="stat-value" id="accuracy-display">100%</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">平均時間</div>
+            <div class="stat-value" id="avg-time-display">0.0s</div>
+          </div>
+        </div>
+
+        <!-- Question Display -->
+        <div class="question-container">
+          <div class="question-display" id="question-display">
+            <span id="question-text">準備中...</span>
+          </div>
+          
+          <!-- Timer Bar -->
+          <div class="timer-bar-container">
+            <div class="timer-bar" id="timer-bar"></div>
+          </div>
+          <div class="timer-text">
+            剩餘時間：<span id="time-remaining">10</span> 秒
+          </div>
+        </div>
+
+        <!-- Answer Options -->
+        <div class="answer-options" id="answer-options">
+          <button class="answer-btn" data-answer="0">A. 0</button>
+          <button class="answer-btn" data-answer="1">B. 0</button>
+          <button class="answer-btn" data-answer="2">C. 0</button>
+          <button class="answer-btn" data-answer="3">D. 0</button>
+        </div>
+
+        <!-- Feedback Message -->
+        <div class="feedback-message" id="feedback-message"></div>
+
+        <!-- Game Controls -->
+        <div class="game-controls">
+          <button id="pause-btn" class="btn btn-secondary">暫停</button>
+          <button id="quit-btn" class="btn btn-danger">結束遊戲</button>
+        </div>
+      </div>
+
+      <!-- Results Screen (Hidden Initially) -->
+      <div id="results-screen" class="results-screen" style="display: none;">
+        <div class="results-container">
+          <h2 class="results-title">🎉 遊戲結束！</h2>
+          <div class="congratulations-message" id="congrats-message">
+            恭喜你完成挑戰！
+          </div>
+          
+          <div class="results-stats">
+            <div class="result-item">
+              <span class="result-label">最終分數：</span>
+              <span class="result-value" id="final-score">0</span>
+            </div>
+            <div class="result-item">
+              <span class="result-label">答題數量：</span>
+              <span class="result-value" id="final-questions">0</span>
+            </div>
+            <div class="result-item">
+              <span class="result-label">正確答案：</span>
+              <span class="result-value" id="final-correct">0</span>
+            </div>
+            <div class="result-item">
+              <span class="result-label">正確率：</span>
+              <span class="result-value" id="final-accuracy">0%</span>
+            </div>
+            <div class="result-item">
+              <span class="result-label">平均反應時間：</span>
+              <span class="result-value" id="final-avg-time">0.0s</span>
+            </div>
+            <div class="result-item">
+              <span class="result-label">最快反應：</span>
+              <span class="result-value" id="final-best-time">0.0s</span>
+            </div>
+          </div>
+
+          <div class="performance-analysis" id="performance-analysis">
+            <!-- Will be filled by JavaScript -->
+          </div>
+
+          <div class="results-actions">
+            <button id="restart-btn" class="btn btn-primary btn-large">再玩一次</button>
+            <button id="new-settings-btn" class="btn btn-secondary">更改設定</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Instructions Page -->
+  <div id="instructions-page" class="page">
+    <div class="container">
+      <header class="page-header">
+        <h1>📖 遊戲說明</h1>
+      </header>
+
+      <div class="content-card">
+        <h2>遊戲目標</h2>
+        <p>在限定時間內正確回答盡可能多的數學題目，挑戰你的數學反應速度和準確性！</p>
+
+        <h2>如何遊玩</h2>
+        <ol class="instruction-list">
+          <li><strong>選擇設定：</strong>在開始前，選擇難度等級、運算類型、時間模式和題目數量。</li>
+          <li><strong>開始遊戲：</strong>點擊「開始遊戲」按鈕，計時器將開始倒數。</li>
+          <li><strong>回答問題：</strong>每道題目會顯示一個數學運算，並提供四個答案選項（A、B、C、D）。</li>
+          <li><strong>選擇答案：</strong>點擊你認為正確的答案按鈕。</li>
+          <li><strong>即時反饋：</strong>系統會立即告訴你答對還是答錯，並顯示正確答案。</li>
+          <li><strong>計時限制：</strong>每道題目都有時間限制，必須在時間結束前回答。</li>
+          <li><strong>查看成績：</strong>完成所有題目或時間結束後，查看你的最終成績和詳細分析。</li>
+        </ol>
+
+        <h2>計分規則</h2>
+        <ul class="instruction-list">
+          <li>每答對一題：<strong>+100 分</strong></li>
+          <li>速度獎勵：根據反應時間給予額外分數（最多 +50 分）</li>
+          <li>答錯或超時：<strong>0 分</strong></li>
+          <li>連續答對：累積連擊獎勵</li>
+        </ul>
+
+        <h2>難度等級</h2>
+        <div class="difficulty-guide">
+          <div class="difficulty-item">
+            <h3>🟢 簡單</h3>
+            <p>數字範圍 1-10，適合初學者</p>
+          </div>
+          <div class="difficulty-item">
+            <h3>🟡 中等</h3>
+            <p>數字範圍 1-50，標準挑戰</p>
+          </div>
+          <div class="difficulty-item">
+            <h3>🟠 困難</h3>
+            <p>數字範圍 1-100，進階挑戰</p>
+          </div>
+          <div class="difficulty-item">
+            <h3>🔴 極限</h3>
+            <p>數字範圍 1-999，終極挑戰</p>
+          </div>
+        </div>
+
+        <h2>運算類型</h2>
+        <ul class="instruction-list">
+          <li><strong>混合運算：</strong>包含加法、減法、乘法和除法</li>
+          <li><strong>僅加法：</strong>只有加法題目</li>
+          <li><strong>僅減法：</strong>只有減法題目</li>
+          <li><strong>僅乘法：</strong>只有乘法題目</li>
+          <li><strong>僅除法：</strong>只有除法題目（保證整除）</li>
+        </ul>
+
+        <h2>小提示 💡</h2>
+        <ul class="instruction-list">
+          <li>保持專注，快速計算但不要急躁</li>
+          <li>先從簡單難度開始練習</li>
+          <li>觀察時間條，合理分配時間</li>
+          <li>錯了不要灰心，繼續挑戰！</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- About Page -->
+  <div id="about-page" class="page">
+    <div class="container">
+      <header class="page-header">
+        <h1>👥 關於我們</h1>
+      </header>
+
+      <div class="content-card">
+        <h2>專案簡介</h2>
+        <p>「數學反應挑戰」是一個互動式數學遊戲，旨在通過趣味性的方式提升玩家的數學計算速度和準確性。本專案結合了遊戲化學習和即時反饋機制，為玩家提供沉浸式的學習體驗。</p>
+
+        <h2>開發團隊</h2>
+        <div class="team-members">
+          <div class="team-member">
+            <div class="member-avatar">👨‍💻</div>
+            <h3>HOICHINGG</h3>
+            <p class="member-role">專案負責人 & 全端開發</p>
+            <p class="member-description">負責整體架構設計、前端開發和遊戲邏輯實現</p>
+          </div>
+          
+          <div class="team-member">
+            <div class="member-avatar">🎨</div>
+            <h3>UI/UX 設計</h3>
+            <p class="member-role">介面設計師</p>
+            <p class="member-description">打造直觀、美觀的使用者介面和互動體驗</p>
+          </div>
+          
+          <div class="team-member">
+            <div class="member-avatar">🧮</div>
+            <h3>數學邏輯</h3>
+            <p class="member-role">演算法工程師</p>
+            <p class="member-description">開發題目生成算法和評分系統</p>
+          </div>
+        </div>
+
+        <h2>技術棧</h2>
+        <div class="tech-stack">
+          <span class="tech-badge">HTML5</span>
+          <span class="tech-badge">CSS3</span>
+          <span class="tech-badge">JavaScript (ES6+)</span>
+          <span class="tech-badge">Responsive Design</span>
+          <span class="tech-badge">Web Audio API</span>
+        </div>
+
+        <h2>專案目標</h2>
+        <ul class="instruction-list">
+          <li>提供有趣的數學練習平台</li>
+          <li>提升學生的數學運算速度</li>
+          <li>培養快速思考和決策能力</li>
+          <li>通過遊戲化增加學習動機</li>
+          <li>支援多種難度和運算類型</li>
+        </ul>
+
+        <h2>版本資訊</h2>
+        <p><strong>版本：</strong>1.0.0</p>
+        <p><strong>發布日期：</strong>2025年10月</p>
+        <p><strong>最後更新：</strong>2025年10月18日</p>
+
+        <h2>聯絡我們</h2>
+        <p>如有任何問題或建議，歡迎聯絡我們：</p>
+        <p>📧 Email: hoichingg@example.com</p>
+        <p>🌐 GitHub: github.com/HOICHINGG</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="main-footer">
+    <div class="footer-container">
+      <div class="footer-content">
+        <p>&copy; 2025 數學反應挑戰 (Math Rush Challenge). 版權所有。</p>
+        <p>開發者：HOICHINGG | 專案作業：JHM5-EX06</p>
+        <p class="footer-links">
+          <a href="#" data-page="game">遊戲</a> | 
+          <a href="#" data-page="instructions">說明</a> | 
+          <a href="#" data-page="about">關於</a>
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Audio Elements (Hidden) -->
+  <audio id="correct-sound" preload="auto">
+    <source src="data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcBj+a2/LDciUFLIHO8tiJNwgZaLvt559NEAxQp+PwtmMcBjiR1/LMeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmwhBSuBzvLZiTYIGGe77eeeTRANU6fk77RgGwU7k9jyyXkmBSh+zPDckT4JFFy06+qmUxELSKDh8r1nHwUrgs/y2IUzBxll" type="audio/wav">
+  </audio>
+  <audio id="wrong-sound" preload="auto">
+    <source src="data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACAgYKDhIWGh4iJiouMjY6PkJGSk5SVlpeYmZqbnJ2en6ChoqOkpaanqKmqq6ytrq+wsbKztLW2t7i5uru8vb6/wMHCw8TFxsfIycrLzM3Oz9DR0tPU1dbX2Nna29zd3t/g4eLj5OXm5+jp6uvs7e7v8PHy8/T19vf4+fr7/P3+/w==" type="audio/wav">
+  </audio>
+  <audio id="complete-sound" preload="auto">
+    <source src="data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACAgoSGiIqMjpCSkpSWmJqcnqCip6m1t8G+vLq4tre0s7Gvra+xtbm9wcTHys3P0dPU1dXW1tbW1dXU09HS0M/NzMrJx8XDwb+9u7m3tbOxr62rqaelo6GfnZuZl5WTkY+NjYuJh4WDgYB+fXx7enl4d3Z1dHNycXBvbm1sa2ppaGdmZWRjYmFgX15dXFtaWVhXVlVUU1JRUE9OTUxLSklIR0ZFRENCQUBAQEFCQ0RFRkdJSktMTU9QUVJTVFVWV1haW11fYGJkZmhqbG5wcnR2eHp8foCCg4aIio2PkZSWmZuepaWoqaqrq62vsLGysrKysrGwr62sq6mopqSioJ6cm5mXlZSTkZCOjYuKiYiHhoWEg4KBgIB/f39+fn5+fn5+fn5/f4B/gA==" type="audio/wav">
+  </audio>
+
+  <script src="scripts/main.js"></script>
+</body>
+</html>

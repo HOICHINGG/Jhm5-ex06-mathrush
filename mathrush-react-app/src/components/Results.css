@@ -1,0 +1,170 @@
+.results-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.results-card {
+  background: white;
+  border-radius: 40px;
+  padding: 4rem;
+  max-width: 900px;
+  width: 100%;
+  box-shadow: 0 25px 80px rgba(0, 0, 0, 0.15);
+  text-align: center;
+}
+
+.trophy-icon {
+  display: inline-block;
+  margin-bottom: 1rem;
+}
+
+.results-title {
+  font-size: 3.5rem;
+  font-weight: 900;
+  color: #1f2937;
+  margin-bottom: 2rem;
+}
+
+.performance-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.5rem 3rem;
+  border-radius: 50px;
+  color: white;
+  font-size: 1.8rem;
+  font-weight: 800;
+  margin-bottom: 3rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.performance-emoji {
+  font-size: 2.5rem;
+}
+
+.results-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+.result-stat {
+  background: linear-gradient(135deg, #f8f9fa, #fff);
+  border-radius: 25px;
+  padding: 2.5rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  border: 3px solid rgba(102, 126, 234, 0.1);
+}
+
+.result-stat .stat-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.stat-label {
+  font-size: 1rem;
+  color: #6b7280;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 1rem;
+}
+
+.stat-value {
+  font-size: 3rem;
+  font-weight: 900;
+}
+
+.stat-value.correct {
+  color: #10b981;
+}
+
+.stat-value.wrong {
+  color: #ef4444;
+}
+
+.stat-value.accuracy {
+  color: #3b82f6;
+}
+
+.stat-value.time {
+  color: #f59e0b;
+}
+
+.stat-value.score {
+  color: #6b7280;
+}
+
+.stat-value.streak {
+  color: #f97316;
+}
+
+.results-actions {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.action-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 1.5rem 3rem;
+  font-size: 1.3rem;
+  font-weight: 800;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  color: white;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+}
+
+.restart-btn {
+  background: #6b7280;
+}
+
+.home-btn {
+  background: #3b82f6;
+}
+
+.difficulty-display {
+  margin-top: 2rem;
+  font-size: 1.2rem;
+  color: #6b7280;
+  font-weight: 600;
+}
+
+@media (max-width: 768px) {
+  .results-card {
+    padding: 2rem;
+  }
+
+  .results-title {
+    font-size: 2.5rem;
+  }
+
+  .performance-badge {
+    font-size: 1.5rem;
+    padding: 1rem 2rem;
+  }
+
+  .results-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .stat-value {
+    font-size: 2.5rem;
+  }
+
+  .action-btn {
+    font-size: 1.1rem;
+    padding: 1.2rem 2rem;
+  }
+}

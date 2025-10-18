@@ -1,0 +1,243 @@
+.gameplay-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.stats-dashboard {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.stat-card {
+  background: white;
+  border-radius: 20px;
+  padding: 2rem;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  border: 2px solid rgba(102, 126, 234, 0.1);
+}
+
+.stat-icon {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.stat-label {
+  font-size: 0.9rem;
+  color: #6b7280;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 0.5rem;
+}
+
+.stat-value {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: #6b7280;
+}
+
+.question-card {
+  background: white;
+  border-radius: 30px;
+  padding: 3rem;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+  margin-bottom: 2rem;
+  border: 3px solid rgba(102, 126, 234, 0.2);
+}
+
+.question-display {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.question-text {
+  font-size: 4rem;
+  font-weight: 800;
+  color: #1f2937;
+  padding: 2rem;
+  background: rgba(107, 114, 128, 0.05);
+  border-radius: 20px;
+}
+
+.timer-container {
+  height: 20px;
+  background: #f3f4f6;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 1rem;
+}
+
+.timer-bar {
+  height: 100%;
+  border-radius: 10px;
+  transition: width 0.1s linear, background-color 0.3s ease;
+}
+
+.timer-text {
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #4b5563;
+}
+
+.time-warning {
+  color: #ef4444;
+  font-weight: 800;
+  animation: pulse 0.5s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+.answers-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.answer-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 2rem;
+  background: #f9fafb;
+  border: 4px solid #e5e7eb;
+  border-radius: 20px;
+  font-size: 1.8rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+}
+
+.answer-btn:hover:not(:disabled) {
+  border-color: #667eea;
+  box-shadow: 0 10px 30px rgba(102, 126, 234, 0.2);
+}
+
+.answer-btn:disabled {
+  cursor: not-allowed;
+}
+
+.answer-btn.selected {
+  border-color: #6b7280;
+  background: rgba(107, 114, 128, 0.1);
+}
+
+.answer-btn.correct {
+  background: #10b981;
+  border-color: #10b981;
+  color: white;
+  animation: correctPulse 0.6s ease;
+}
+
+.answer-btn.wrong {
+  background: #ef4444;
+  border-color: #ef4444;
+  color: white;
+  animation: wrongShake 0.6s ease;
+}
+
+@keyframes correctPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+@keyframes wrongShake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-10px); }
+  75% { transform: translateX(10px); }
+}
+
+.answer-letter {
+  font-size: 1.5rem;
+  font-weight: 800;
+  opacity: 0.6;
+}
+
+.answer-value {
+  font-size: 2rem;
+}
+
+.feedback-message {
+  text-align: center;
+  font-size: 1.8rem;
+  font-weight: 700;
+  padding: 2rem;
+  border-radius: 20px;
+  margin-bottom: 2rem;
+}
+
+.feedback-message.correct {
+  background: rgba(16, 185, 129, 0.1);
+  color: #10b981;
+  border: 3px solid #10b981;
+}
+
+.feedback-message.wrong {
+  background: rgba(239, 68, 68, 0.1);
+  color: #ef4444;
+  border: 3px solid #ef4444;
+}
+
+.game-controls {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.control-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem 2rem;
+  font-size: 1.1rem;
+  font-weight: 700;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  color: white;
+  transition: all 0.3s ease;
+}
+
+.pause-btn {
+  background: #f59e0b;
+  box-shadow: 0 5px 15px rgba(245, 158, 11, 0.3);
+}
+
+.quit-btn {
+  background: #ef4444;
+  box-shadow: 0 5px 15px rgba(239, 68, 68, 0.3);
+}
+
+@media (max-width: 768px) {
+  .gameplay-container {
+    padding: 1rem;
+  }
+
+  .question-text {
+    font-size: 2.5rem;
+    padding: 1.5rem;
+  }
+
+  .answers-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .answer-btn {
+    font-size: 1.5rem;
+    padding: 1.5rem;
+  }
+
+  .stat-value {
+    font-size: 2rem;
+  }
+}
